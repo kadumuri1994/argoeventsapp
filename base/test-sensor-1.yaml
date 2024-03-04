@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: test-sensor-2
+spec:
+  dependencies:
+    - name: dependency1
+      eventSourceName: resource-event-source
+      eventName: example
+      filters:
+        exprs:
+          - expr: jobname == "argo-events-job-one-vk-"
+            fields:
+              - path: body.metadata.generateName
+                name: jobname
+    - name: dependency1
+      eventSourceName: resource-event-source
+      eventName: example
+      filters:
+        exprs:
+          - expr: jobname == "argo-events-job-two-vk-"
+            fields:
+              - path: body.metadata.generateName
+                name: jobname
+  triggers:
+    - template:
+        name: http-trigger
+        http:
+          url: http://http-server.argo-events.svc:8090/hello
+          payload:
+            - src:
+                dependencyName: dependency1
+                dataKey: notification.0.s3.bucket.name
+              dest: bucket
+            - src:
+                dependencyName: dependency1
+                contextKey: type
+              dest: type
+          method: POST
+      retryStrategy:
+        steps: 3
+        duration: 3s
