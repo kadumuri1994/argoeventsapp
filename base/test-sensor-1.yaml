@@ -13,7 +13,7 @@ spec:
             fields:
               - path: body.metadata.generateName
                 name: jobname
-    - name: dependency1
+    - name: dependency2
       eventSourceName: resource-event-source
       eventName: example
       filters:
