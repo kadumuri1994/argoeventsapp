@@ -15,6 +15,7 @@ spec:
                 name: jobname
   triggers:
     - template:
+        name: text-trigger
         text: |-
           This is a message triggered by the HTTP sensor.
           Your message: {{ .sensor.hook.path }}
