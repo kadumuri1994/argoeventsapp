@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: test-sensor-2
+  name: test-sensor-3
 spec:
   dependencies:
     - name: dependency1
