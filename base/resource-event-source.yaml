@@ -3,8 +3,11 @@ kind: EventSource
 metadata:
   name: resource-event-source
 spec:
+  template:
+    serviceAccountName: serviceAccount
   resource:
     example:
+      namespace: argo-events
       filter:
         # prefix: argo-events-job
         labels:
