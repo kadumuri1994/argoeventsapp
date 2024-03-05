@@ -6,7 +6,7 @@ spec:
   resource:
     example:
       filter:
-        prefix: argo-events-job
+        # prefix: argo-events-job
         labels:
           - key: workflows.argoproj.io/completed
             operation: ==
