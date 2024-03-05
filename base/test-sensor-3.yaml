@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: test-sensor-2
+spec:
+  dependencies:
+    - name: dependency1
+      eventSourceName: resource-event-source
+      eventName: example
+      filters:
+        exprs:
+          - expr: jobname == "argo-events-job-two-vk-"
+            fields:
+              - path: body.metadata.generateName
+                name: jobname
+  triggers:
+    - template:
+        text: |-
+          This is a message triggered by the HTTP sensor.
+          Your message: {{ .sensor.hook.path }}
