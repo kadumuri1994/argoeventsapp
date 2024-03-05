@@ -6,3 +6,4 @@ resources:
 - resource-event-source.yaml
 - test-sensor-1.yaml
 - test-sensor-2.yaml
+- test-sensor-3.yaml
